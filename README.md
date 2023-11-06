@@ -1,3 +1,4 @@
+[![Test,Lint,Format](https://github.com/johncoogan53/JHC_Week10Mini/actions/workflows/cicd.yml/badge.svg)](https://github.com/johncoogan53/JHC_Week10Mini/actions/workflows/cicd.yml)
 ## Pyspark Azure Databricks Experimentation
 In this project we will be using a linked pyspark notebook hosted by azure databricks to perform statistical analysis leveraging cloud hosted services. The pdf provided in the repository shows what the notebook looks like while working within an Azure workspace. For demonstration purposes we used a databricks dataset which was approximately 53,000 rows. Using a pyspark notebook in an Azure Databricks workspace allows us to do some very helpful things:
 
