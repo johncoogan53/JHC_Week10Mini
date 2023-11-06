@@ -1,36 +1,25 @@
-# Variables
-PYTHON := python3
-VENV := venv
-SRC_DIR := ../sqlite-lab_John-Coogan/mylib
-TEST_DIR := ../sqlite-lab_John-Coogan
-REQUIREMENTS := requirements.txt
+install:
+	pip install --upgrade pip &&\
+		pip install -r requirements.txt
 
-# Phony targets
-.PHONY: all venv install test format lint clean
+test:
+	#python -m pytest -vv --cov=main --cov=mylib test_*.py
 
-# Default target
-all: venv install test format lint
+format:	
+	#black *.py 
 
-# Create a virtual environment
-venv:
-	$(PYTHON) -m venv $(VENV)
-
-# Install project dependencies
-install: venv
-	$(VENV)/bin/pip install --upgrade pip -r  $(REQUIREMENTS)
-
-# Run unit tests
-test: 
-	$(VENV)/bin/pytest $(TEST_DIR)
-
-# Format code with Black
-format:
-	$(VENV)/bin/black $(SRC_DIR)
-
-# Lint code with Ruff
 lint:
-	$(VENV)/bin/ruff check $(SRC_DIR)
+	#disable comment to test speed
+	#pylint --disable=R,C --ignore-patterns=test_.*?py *.py mylib/*.py
+	#ruff linting is 10-100X faster than pylint
+	#ruff check *.py mylib/*.py
 
-# Clean up generated files and virtual environment
-clean:
-	rm -rf $(VENV) __pycache__ .pytest_cache
+container-lint:
+	docker run --rm -i hadolint/hadolint < Dockerfile
+
+refactor: format lint
+
+deploy:
+	#deploy goes here
+		
+all: install lint test format deploy
